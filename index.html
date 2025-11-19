@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence-Based Medicine: A Guide for Modern Practice</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px 0;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 0 25px 25px;
+            border-bottom: 2px solid #e8ecf1;
+        }
+
+        .sidebar-header h2 {
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-header p {
+            font-size: 13px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .nav-section {
+            margin: 0;
+        }
+
+        .nav-section-title {
+            padding: 15px 25px 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #2563eb;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+        }
+
+        .nav-section:first-of-type .nav-section-title {
+            margin-top: 0;
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 0;
+        }
+
+        .nav-button {
+            width: 100%;
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            word-wrap: break-word;
+            white-space: normal;
+        }
+
+        .nav-button:hover {
+            background: #f0f4f8;
+            color: #2c3e50;
+            padding-left: 30px;
+        }
+
+        .nav-button.active {
+            background: #ecf0f6;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 25px;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            overflow-y: auto;
+            max-height: calc(100vh - 40px);
+        }
+
+        /* Typography */
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #2563eb;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: #2563eb;
+            font-size: 1.8em;
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        em {
+            color: #2563eb;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+
+        blockquote {
+            border-left: 4px solid #2563eb;
+            padding-left: 20px;
+            margin-left: 0;
+            margin-bottom: 20px;
+            color: #666;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #2563eb;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            border-bottom: 1px solid #e8ecf1;
+            padding: 12px;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        hr {
+            margin: 40px 0;
+            border: none;
+            border-top: 1px solid #e8ecf1;
+        }
+
+        /* Landing Page */
+        .landing-page {
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .landing-page h1 {
+            border: none;
+            padding: 0;
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .landing-page .subtitle {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .landing-page .description {
+            font-size: 1.05em;
+            color: #555;
+            line-height: 1.9;
+            max-width: 700px;
+            margin: 30px auto 50px;
+        }
+
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .chapter-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .chapter-card:nth-child(3n+2) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .chapter-card:nth-child(3n) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .chapter-card:nth-child(3n+1) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .chapter-card h3 {
+            margin: 0 0 12px 0;
+            color: white;
+            font-size: 1.2em;
+        }
+
+        .chapter-card p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            background: #f0f4f8;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .back-button:hover {
+            background: #e5edf5;
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+
+        .loading {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f0f4f8;
+            border-top: 3px solid #2563eb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #fee;
+            border: 1px solid #fcc;
+            border-radius: 6px;
+            padding: 20px;
+            color: #c33;
+            margin: 20px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: static;
+                max-height: none;
+            }
+
+            .main-content {
+                padding: 30px 20px;
+                max-height: none;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            .landing-page h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>EBM Book</h2>
+                <p>Navigate sections</p>
+            </div>
+            <nav id="navigation">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <button class="nav-button active" onclick="showPage('home')">Home</button>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="mainContent">
+            <div id="home" class="page landing-page">
+                <h1>Evidence-Based Medicine</h1>
+                <p class="subtitle">A Guide for Modern Practice in the Age of AI</p>
+                <p class="description">
+                    This comprehensive guide explores how to practice evidence-based medicine in an era transformed by artificial intelligence. Learn to formulate precise clinical questions, navigate the changing landscape of medical evidence, and use AI tools effectively while maintaining rigorous clinical judgment.
+                </p>
+                <div class="chapter-grid" id="chapterGrid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ========================================
+        // CONFIGURE YOUR GITHUB REPOSITORY HERE
+        // ========================================
+        const GITHUB_CONFIG = {
+            owner: 'rajking',      // e.g., 'john-doe'
+            repo: 'EBM-E-Book             // e.g., 'ebm-book'
+            branch: 'main',                     // or 'master' if that's your default
+            folder: '',                         // leave empty if files are in root, or 'chapters/' if in a folder
+            filePattern: /^(Chapter|Appendix)_\d+.*\.md$/i  // Matches: Chapter_1.md, Appendix_A.md, etc.
+        };
+
+        let allFiles = [];
+        let loadedContent = {};
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializeSite);
+
+        async function initializeSite() {
+            console.log('Initializing site...');
+            const files = await discoverFiles();
+            
+            if (files.length === 0) {
+                showConfigError();
+                return;
+            }
+
+            allFiles = files.sort(customSort);
+            populateNavigation();
+            populateChapterGrid();
+        }
+
+        async function discoverFiles() {
+            try {
+                const apiUrl = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.folder}`;
+                
+                console.log(`Fetching from: ${apiUrl}`);
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                // Filter files matching pattern
+                const mdFiles = data
+                    .filter(item => item.type === 'file' && GITHUB_CONFIG.filePattern.test(item.name))
+                    .map(item => ({
+                        name: item.name,
+                        id: item.name.replace(/\.md$/, '').toLowerCase().replace(/[^a-z0-9_]/g, '_'),
+                        title: item.name.replace('.md', '').replace(/_/g, ' '),
+                        path: item.path
+                    }));
+                
+                console.log(`Found ${mdFiles.length} files:`, mdFiles.map(f => f.name));
+                return mdFiles;
+            } catch (error) {
+                console.error('Error discovering files:', error);
+                return [];
+            }
+        }
+
+        function customSort(a, b) {
+            // Extract numbers for sorting (Chapter_1, Chapter_2, etc.)
+            const numA = parseInt(a.name.match(/\d+/)?.[0] || 0);
+            const numB = parseInt(b.name.match(/\d+/)?.[0] || 0);
+            
+            // Separate Chapters and Appendices
+            const isChapterA = a.name.toLowerCase().startsWith('chapter');
+            const isChapterB = b.name.toLowerCase().startsWith('chapter');
+            
+            if (isChapterA !== isChapterB) {
+                return isChapterA ? -1 : 1; // Chapters first
+            }
+            
+            return numA - numB; // Then sort by number
+        }
+
+        function populateNavigation() {
+            const nav = document.getElementById('navigation');
+            const listItem = nav.querySelector('.nav-item');
+            
+            let currentSection = null;
+            let currentSection_html = '';
+            
+            allFiles.forEach((file, index) => {
+                const isChapter = file.name.toLowerCase().startsWith('chapter');
+                const section = isChapter ? 'Chapters' : 'Appendices';
+                
+                // If section changed, create new section
+                if (section !== currentSection) {
+                    if (currentSection_html) {
+                        nav.innerHTML += currentSection_html;
+                    }
+                    currentSection = section;
+                    currentSection_html = `
+                        <div class="nav-section">
+                            <div class="nav-section-title">${section}</div>
+                            <ul class="nav-list">
+                    `;
+                }
+                
+                currentSection_html += `
+                    <li class="nav-item">
+                        <button class="nav-button" onclick="showPage('${file.id}')">${file.title}</button>
+                    </li>
+                `;
+            });
+            
+            if (currentSection_html) {
+                currentSection_html += `</ul></div>`;
+                nav.innerHTML += currentSection_html;
+            }
+        }
+
+        function populateChapterGrid() {
+            const grid = document.getElementById('chapterGrid');
+            
+            allFiles.forEach((file, index) => {
+                const colors = [
+                    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                    'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                    'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
+                ];
+                
+                const card = document.createElement('div');
+                card.className = 'chapter-card';
+                card.style.background = colors[index % colors.length];
+                card.onclick = () => showPage(file.id);
+                
+                card.innerHTML = `
+                    <h3>${file.title.split('_')[0]}</h3>
+                    <p>Click to read</p>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        async function loadFromGitHub(filename) {
+            try {
+                const path = GITHUB_CONFIG.folder ? `${GITHUB_CONFIG.folder}/${filename}` : filename;
+                const url = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/${path}`;
+                
+                console.log(`Loading from: ${url}`);
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${filename} (${response.status})`);
+                }
+                
+                return await response.text();
+            } catch (error) {
+                console.error('Error loading from GitHub:', error);
+                throw error;
+            }
+        }
+
+        function showPage(pageId) {
+            const mainContent = document.getElementById('mainContent');
+            
+            // Update active button
+            document.querySelectorAll('.nav-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+
+            if (pageId === 'home') {
+                mainContent.innerHTML = `
+                    <div id="home" class="page landing-page">
+                        <h1>Evidence-Based Medicine</h1>
+                        <p class="subtitle">A Guide for Modern Practice in the Age of AI</p>
+                        <p class="description">
+                            This comprehensive guide explores how to practice evidence-based medicine in an era transformed by artificial intelligence. Learn to formulate precise clinical questions, navigate the changing landscape of medical evidence, and use AI tools effectively while maintaining rigorous clinical judgment.
+                        </p>
+                        <div class="chapter-grid" id="chapterGrid">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                `;
+                populateChapterGrid();
+            } else {
+                const file = allFiles.find(f => f.id === pageId);
+                if (!file) return;
+                
+                mainContent.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading...</p></div>';
+                
+                loadFromGitHub(file.name).then(markdown => {
+                    const html = marked.parse(markdown);
+                    mainContent.innerHTML = `
+                        <button class="back-button" onclick="showPage('home')">← Back to Home</button>
+                        ${html}
+                    `;
+                    mainContent.scrollTop = 0;
+                }).catch(error => {
+                    mainContent.innerHTML = `
+                        <button class="back-button" onclick="showPage('home')">← Back to Home</button>
+                        <div class="error">
+                            <strong>Error loading ${file.name}:</strong>
+                            <p>${error.message}</p>
+                            <p><strong>Check:</strong></p>
+                            <ul>
+                                <li>GitHub repository is public</li>
+                                <li>GITHUB_CONFIG settings are correct</li>
+                                <li>File exists in the repository</li>
+                                <li>File matches the pattern (Chapter_1.md, Appendix_A.md, etc.)</li>
+                            </ul>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        function showConfigError() {
+            const mainContent = document.getElementById('mainContent');
+            mainContent.innerHTML = `
+                <div class="error">
+                    <h2>Configuration Required</h2>
+                    <p>No markdown files found. Please configure your GitHub repository:</p>
+                    <ol>
+                        <li>Open this HTML file in a text editor</li>
+                        <li>Find the <strong>GITHUB_CONFIG</strong> object near the top of the script</li>
+                        <li>Update with your values:
+                            <pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; margin: 10px 0; overflow-x: auto;">
+const GITHUB_CONFIG = {
+    owner: 'YOUR_GITHUB_USERNAME',
+    repo: 'YOUR_REPO_NAME',
+    branch: 'main',
+    folder: ''
+};</pre>
+                        </li>
+                        <li>Upload files to GitHub matching the pattern:
+                            <ul>
+                                <li><code>Chapter_1.md</code>, <code>Chapter_2.md</code>, etc.</li>
+                                <li><code>Appendix_A.md</code>, <code>Appendix_B.md</code>, etc.</li>
+                            </ul>
+                        </li>
+                        <li>Make sure the repository is <strong>public</strong></li>
+                        <li>Reload this page</li>
+                    </ol>
+                    <p>Check the browser console (F12) for more details.</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
